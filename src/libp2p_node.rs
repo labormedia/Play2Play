@@ -21,25 +21,6 @@ pub struct MyBehaviour {
     mdns: mdns::async_io::Behaviour,
 }
 
-/*
-impl NetworkBehaviour for MyBehaviour {
-    fn inject_event(&mut self, event: mdns::MdnsEvent) {
-        if let mdns::MdnsEvent::Discovered(list) = event {
-            for (peer_id, multiaddr) in list {
-                self.kademlia.add_address(&peer_id, multiaddr.clone());
-                println!("Discovered kademlia peer {} at {}", peer_id, multiaddr.clone());
-            }
-        }
-    }
-}
-
-impl NetworkBehaviour<kad::KademliaEvent> for MyBehaviour {
-    fn inject_event(&mut self, event: kad::KademliaEvent) {
-        println!("Kademlia event: {:?}", event);
-    }
-}
-*/
-
 pub async fn create_swarm(local_key: identity::Keypair) -> Swarm<MyBehaviour> {
     let peer_id = PeerId::from(local_key.public());
     let transport = development_transport(local_key.clone()).await.unwrap();

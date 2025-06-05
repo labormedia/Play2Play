@@ -26,7 +26,6 @@ pub fn parse_legacy_multiaddr(text: &str) -> Result<Multiaddr, Box<dyn Error>> {
         .map(|part| if part == "ipfs" { "p2p" } else { part })
         .collect::<Vec<_>>()
         .join("/");
-    println!("Sanitized address : {}", sanitized);
     let mut res = Multiaddr::from_str(&sanitized)?;
     strip_peer_id(&mut res);
     Ok(res)
