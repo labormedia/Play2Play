@@ -4,7 +4,7 @@ use libp2p::{
     swarm::{
         NetworkBehaviour,
         SwarmBuilder,
-        SwarmEvent::Behaviour
+        SwarmEvent,
     },
     futures::StreamExt,
 };
@@ -42,7 +42,8 @@ pub async fn listen_for_events(swarm: &mut Swarm<MyBehaviour>, redis_conn: &mut 
             event = swarm.select_next_some() => {
                 // Process incoming libp2p events
                 match event {
-                    event => println!("Incoming Event {:?}", event),           
+                    SwarmEvent::ConnectionEstablished {peer_id , ..} => println!("Connection Established with {:?}", peer_id),   
+                    _ => println!("Incoming Event with {:?}", event),         
                 }
             }            
         }

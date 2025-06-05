@@ -16,7 +16,8 @@ async fn main() {
     
     let _ = redis_conn.set::<_, _, ()>("event:null", format!("{:?}",public_key)).await;
     swarm.listen_on(multi_addr.parse().unwrap()).unwrap();
-    //tokio::spawn(async move {
-        libp2p_node::listen_for_events(&mut swarm, &mut redis_conn, public_key.into()).await;
-    //});
+    
+    println!("Local peer_id {}", swarm.local_peer_id());
+        
+    libp2p_node::listen_for_events(&mut swarm, &mut redis_conn, public_key.into()).await;
 }
