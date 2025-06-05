@@ -1,9 +1,16 @@
 # Play2Play
 P2P Playground tools.
 
+## Requirements
+
+Run Redis:
+```bash
+$ docker run -d --name redis -p 6379:6379 redis
+```
+
 ## Run example
 
-bash```
+```bash
 $ cargo run --example basic
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
      Running `target/debug/examples/basic`
